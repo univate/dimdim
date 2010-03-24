@@ -1,0 +1,110 @@
+<?php
+// $Id: dimdim.install,v 1.4 2010/03/24 14:06:49 univate Exp $ 
+
+/**
+ * @file
+ * Installation for dimdim.
+ */
+ 
+/**
+ * Implementation of hook_schema().
+ */
+function dimdim_schema() {
+
+  $schema = array();
+  $schema['dimdim'] = array(
+  'description' => 'Table for storing additional properties for dimdim conference nodes.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The node identifier of a dimdim conference',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'duration_hours' => array(
+        'description' => 'The duration of the dimdim conference in hours.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'duration_minutes' => array(
+        'description' => 'The duration of the dimdim conference in minutes.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'start_date' => array(
+        'description' => 'The start date/time of the dimdim conference in unix_time.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'meeting_status' => array(
+        'description' => 'The current status of the meeting.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'host' => array(
+        'description' => 'The user id to host/presenter of dimdim conference.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'features' => array(
+        'type' => 'text',
+        'serialize' => TRUE,
+        'not null' => FALSE,
+      ),
+      'meeting_id' => array(
+        'description' => 'The dimdim meeting id.',
+        'type' => 'varchar',
+        'length' => '64',
+        'not null' => FALSE,
+      ),
+      'recording' => array(
+        'description' => 'The dimdim recording url or embed code.',
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+    ), 
+    'primary key' => array('nid'),
+  );
+
+  return $schema;
+}
+/**
+ * Install.
+ */
+function dimdim_install() {
+  //create a table to store the dimdim conference data in
+  drupal_install_schema('dimdim');
+}
+
+/**
+* Uninstall
+*/
+function dimdim_uninstall() {
+  //remove the table and all data that was created during installation
+  drupal_uninstall_schema('dimdim');
+  //delete variables stored in the drupal
+  //db_query("DELETE FROM {variable} WHERE name LIKE 'dimdim_%'");
+}
+
+function dimdim_update_1() {
+  $ret = array();
+  db_change_field($ret, 'dimdim', 'timezone', 'meeting_status',
+    array(
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+    )
+  );
+  return $ret;
+}
+
+/**
+ *
+function dimdim_update_6000() {
+}
+ */

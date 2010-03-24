@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document for dimdim module for Drupal
+ */
+ 
+/* display time increment drop downs inline */
+#edit-hours-wrapper, #edit-minutes-wrapper, #edit-starthours-wrapper, #edit-startminutes-wrapper, #edit-startampm-wrapper
+{
+ display:inline;
+ float: left;
+ padding-left: 10px;
+}
+

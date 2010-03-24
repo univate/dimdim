@@ -1,0 +1,14 @@
+; $Id: dimdim.info,v 1.2 2010/03/24 14:06:49 univate Exp $
+name = Dim Dim
+description = Integrates a standalone installation of Dim Dim with Drupal 6.
+core = 6.x
+
+dependencies[] = date_popup
+
+
+; Information added by drupal.org packaging script on 2010-01-12
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "dimdim"
+datestamp = "1263297812"
+
